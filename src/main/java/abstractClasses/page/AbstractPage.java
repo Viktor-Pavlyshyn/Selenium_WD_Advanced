@@ -31,4 +31,10 @@ public abstract class AbstractPage {
         }
         return result;
     }
+
+    public void verifyIsPageUrlCorrect() {
+        if (!checkUrl()) {
+            throw new RuntimeException(getDriver().getCurrentUrl() + "is incorrect.");
+        }
+    }
 }

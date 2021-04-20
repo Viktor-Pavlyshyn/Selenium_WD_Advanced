@@ -8,8 +8,9 @@ import org.junit.runner.RunWith;
 @CucumberOptions(
         features = {"src/test/resources/features"},
         glue = "stepDefs",
+        publish = true,
         plugin = {"json:target/cucumber-reports/Cucumber.json"},
-        tags = "@Runme"
+        tags = "@Regression"
 )
 
 public class TestRunner {

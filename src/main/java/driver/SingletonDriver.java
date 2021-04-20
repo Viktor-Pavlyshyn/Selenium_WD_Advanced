@@ -1,5 +1,6 @@
 package driver;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
@@ -14,6 +15,7 @@ public class SingletonDriver {
 
     public static WebDriver getDriver() {
         if (instance == null) {
+            WebDriverManager.chromedriver().setup();
             instance = new ChromeDriver(getChromeOptions());
             instance.manage().window().maximize();
             instance.manage().timeouts().implicitlyWait(IMPLICITLY_WAIT_TIMEOUT, TimeUnit.SECONDS);

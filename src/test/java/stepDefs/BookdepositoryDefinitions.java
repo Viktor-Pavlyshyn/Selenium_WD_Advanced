@@ -7,6 +7,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 import lombok.extern.log4j.Log4j2;
+import utils.PageUrl;
 
 import java.util.List;
 import java.util.Map;
@@ -38,9 +39,12 @@ public class BookdepositoryDefinitions {
     }
 
     @And("I am redirected to a {string}")
-    public void iAmRedirectedToA(String value) {
+    public void iAmRedirectedToA(String pageName) {
+        assertThat(PageUrl.getPageByName(pageName).checkUrl(getDriver().getCurrentUrl()))
+                .as("Incorrect url is opened.")
+                .isTrue();
 
-        log.info("{} is opened.", value);
+        log.info("{} is opened.", pageName);
     }
 
     @And("Search results contain the following products")

@@ -1,8 +1,8 @@
 package abstractClasses.fragment;
 
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
@@ -13,13 +13,12 @@ import static driver.SingletonDriver.getDriver;
 public abstract class AbstractFragment extends WebDriverWaiter {
     private WebElement rootElement;
     private Select select;
-    private Actions builder;
-    private Action action;
+    private Actions actions;
     private JavascriptExecutor js;
 
     public AbstractFragment() {
         PageFactory.initElements(getDriver(), this);
-        builder = new Actions(getDriver());
+        actions = new Actions(getDriver());
         js = (JavascriptExecutor)getDriver();
     }
 
@@ -44,16 +43,26 @@ public abstract class AbstractFragment extends WebDriverWaiter {
         getDriver().switchTo().defaultContent();
     }
 
-
     public void moveToElementAndClick(WebElement element){
-        action = builder.moveToElement(element)
+        actions.moveToElement(element)
                 .click()
-                .build();
-        action.perform();
+                .perform();
+    }
+
+    public void inputAndPressEnter(WebElement element, String text){
+        actions.moveToElement(element)
+                .sendKeys(element, text)
+                .sendKeys(Keys.ENTER)
+                .perform();
     }
 
     public void elementHighlighter(WebElement element) {
         js.executeScript("arguments[0].setAttribute('style', 'background: yellow; border: 2px solid red;');", element);
     }
+
+    public void clickOnElementWithJS(WebElement element) {
+        js.executeScript("arguments[0].click();", element);
+    }
+
 }
 

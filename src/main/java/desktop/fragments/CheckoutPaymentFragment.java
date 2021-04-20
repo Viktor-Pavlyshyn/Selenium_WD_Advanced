@@ -50,7 +50,7 @@ public class CheckoutPaymentFragment  extends AbstractFragment {
     }
 
     public void clickOnContinueToPayment() {
-        moveToElementAndClick(continueToPaymentButton);
+        clickOnElementWithJS(continueToPaymentButton);
     }
 
     public void selectCardType(String cardType) {

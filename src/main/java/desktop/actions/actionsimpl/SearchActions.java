@@ -7,7 +7,6 @@ public class SearchActions {
 
     public SearchActions inputTextAndPressEnter(String searchData) {
         searchFragment.inputValue(searchData);
-        searchFragment.pressEnter();
         return this;
     }
 }

@@ -9,7 +9,7 @@
   <version>1.0</version>
 
   <name>Selenium_WD_Advanced</name>
-  <url>hhttps://www.bookdepository.com/</url>
+  <url>https://www.bookdepository.com/</url>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

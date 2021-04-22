@@ -1,21 +1,20 @@
 package stepDefs;
 
 import desktop.actions.ActionsRepository;
+import desktop.pages.BasketPage;
 import desktop.pages.HomePage;
+import desktop.pages.SearchResultPage;
+import dto.DeliveryAddressInformation;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
-import lombok.extern.log4j.Log4j2;
-import utils.PageUrl;
 
 import java.util.List;
 import java.util.Map;
 
-import static driver.SingletonDriver.getDriver;
-import static org.assertj.core.api.Assertions.assertThat;
+import static webdriver.DriverManager.getDriver;
 
-@Log4j2
 public class BookdepositoryDefinitions {
     private final ActionsRepository actions = new ActionsRepository();
 
@@ -24,128 +23,109 @@ public class BookdepositoryDefinitions {
         getDriver().manage().deleteAllCookies();
     }
 
-    @And("I open the {string}")
-    public void iOpenThe(String value) {
-        final HomePage homePage = new HomePage();
+    @And("I open the \"Initial home page\"")
+    public void iOpenThe() {
+        HomePage homePage = new HomePage();
+        homePage.checkUrl();
 
         getDriver().get(homePage.getPageUrl());
-        homePage.verifyIsPageUrlCorrect();
-        log.info("{} is opened.", value);
     }
 
     @And("I search for {string}")
     public void iSearchFor(String value) {
-        actions.getSearchActions().inputTextAndPressEnter(value);
+        actions.getHomeActions().inputTextAndPressEnter(value);
     }
 
-    @And("I am redirected to a {string}")
-    public void iAmRedirectedToA(String pageName) {
-        assertThat(PageUrl.getPageByName(pageName).checkUrl(getDriver().getCurrentUrl()))
-                .as("Incorrect url is opened.")
-                .isTrue();
-
-        log.info("{} is opened.", pageName);
+    @And("I am redirected to a Search page")
+    public void iAmRedirectedToASearchPage() {
+        new SearchResultPage().checkUrl();
     }
 
     @And("Search results contain the following products")
     public void searchResultsContainTheFollowingProducts(List<String> searchParam) {
         actions.getResultSearchActions()
-                .verifyIfResultTitleContainsValue(searchParam);
-
+                .verifyThatResultContainsValue(searchParam);
     }
 
     @And("I apply the following search filters")
-    public void iApplyTheFollowingSearchFilters(Map<String,String> filterParam) {
-        actions.getFilterActions()
+    public void iApplyTheFollowingSearchFilters(Map<String, String> filterParam) {
+        actions.getResultSearchActions()
                 .selectAllOptionAndApply(filterParam);
     }
 
     @And("Search results contain only the following products")
     public void searchResultsContainOnlyTheFollowingProducts(List<String> searchParam) {
         actions.getResultSearchActions()
-                .verifyIfResultTitleContainsValue(searchParam);
+                .verifyThatResultContainsValue(searchParam);
     }
 
-    @And("I click {string} button for product with name {string}")
-    public void iClickAddToBasketButtonForProductWithName(String value, String bookName) {
+    @And("I click 'Add to basket' button for product with name {string}")
+    public void iClickAddToBasketButtonForProductWithName(String bookName) {
         actions.getResultSearchActions()
                 .clickOnAddToBasketByBookName(bookName);
-
-        log.info("Click {} button for product with name {}", value, bookName);
     }
 
     @And("I select {string} in basket pop-up")
     public void iSelectBasketCheckoutInBasketPopUp(String value) {
-        actions.getResultSearchActions().clickOnBasketCheckOutButton();
-        log.info("Select {} in basket pop-up", value);
+        actions.getResultSearchActions()
+                .clickOnBasketCheckOutButton();
+    }
+
+    @And("I am redirected to a Basket page")
+    public void iAmRedirectedToABasketPage() {
+        new BasketPage().checkUrl();
     }
 
     @And("Basket order summary is as following:")
     public void basketOrderSummaryIsAsFollowing(DataTable dataTable) {
-        String textOrderSummery = actions.getBasketActions()
-                .getTextFromCheckoutOrderSummary();
-
-        dataTable.asList()
-                .forEach(date -> assertThat(textOrderSummery.contains(date))
-                        .as("Order summery does not contains - {}", date)
-                        .isTrue()
-                );
+        actions.getBasketActions()
+                .verifyThatTextFromCheckoutOrderSummaryContains(dataTable);
     }
 
-    @And("I click {string} button on {string} page")
-    public void iClickCheckoutButtonOnBasketPage(String button, String page) {
-        actions.getBasketActions().clickOnButtonCheckout();
-
-        log.info("click {} button on {} page", button, page);
+    @And("I click 'Checkout' button on 'Basket' page")
+    public void iClickCheckoutButtonOnBasketPage() {
+        actions.getBasketActions()
+                .clickOnButtonCheckout();
     }
+
 
     @And("I checkout as a new customer with email {string}")
     public void iCheckoutAsANewCustomerWithEmail(String email) {
-        actions.getCheckoutBasketActions().enterEmail(email);
+        actions.getCheckoutActions().enterEmail(email);
     }
 
     @And("Checkout order summary is as following:")
     public void checkoutOrderSummaryIsAsFollowing(DataTable dataTable) {
-        String textOrderSummery = actions.getCheckoutBasketActions()
-                .getTextFromOrderSummary();
-
-        dataTable.asList()
-                .forEach(date -> assertThat(textOrderSummery.contains(date))
-                        .as("Order summery does not contains - {}", date)
-                        .isTrue()
-                );
+        actions.getCheckoutActions()
+                .verifyThatCheckoutOrderSummaryContains(dataTable);
     }
 
     @And("I fill delivery address information manually:")
-    public void iFillDeliveryAddressInformationManually(DataTable dataTable) {
-        actions.getCheckoutBasketActions()
-                .fillDeliveryAddressInformation(dataTable.asMaps());
+    public void iFillDeliveryAddressInformationManually(DeliveryAddressInformation addressInf) {
+        actions.getCheckoutActions()
+                .fillDeliveryAddressInformation(addressInf);
     }
 
-    @And("{string} section is disabled for editing")
-    public void paymentSectionIsDisabledForEditing(String value) {
-        actions.getCheckoutBasketActions().verifyPaymentDisabledContainer();
-
-        log.info("{} section is disabled for editing", value);
+    @And("'Payment' section is disabled for editing")
+    public void paymentSectionIsDisabledForEditing() {
+        actions.getCheckoutActions()
+                .verifyPaymentDisabledContainer();
     }
 
-    @When("I press {string} button on checkout")
-    public void iPressContinueToPaymentButtonOnCheckout(String value) {
-        actions.getCheckoutBasketActions().pressContinueToPayment();
-
-        log.info("Press {} button on checkout", value);
+    @When("I press 'Continue to payment' button on checkout")
+    public void iPressContinueToPaymentButtonOnCheckout() {
+        actions.getCheckoutActions()
+                .pressContinueToPayment();
     }
 
-    @And("{string} and {string} sections are disabled for editing")
-    public void deliveryAddressAndBillingAddressSectionsAreDisabledForEditing(String value, String value2) {
-
-
-        log.info("{} and {} sections are disabled for editing", value, value2);
+    @And("'Delivery Address' and 'Billing Address' sections are disabled for editing")
+    public void deliveryAddressAndBillingAddressSectionsAreDisabledForEditing() {
+        //can't check
     }
 
     @And("I enter my card details")
     public void iEnterMyCardDetails(DataTable dataTable) {
-        actions.getCheckoutBasketActions()
+        actions.getCheckoutActions()
                 .enterCardDetails(dataTable.asMap(String.class, String.class));
     }
 }

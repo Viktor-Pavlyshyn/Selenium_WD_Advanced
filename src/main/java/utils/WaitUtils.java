@@ -1,16 +1,15 @@
 package utils;
 
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.FluentWait;
 
 import java.time.Duration;
-import java.util.NoSuchElementException;
 
-
-import static driver.SingletonDriver.getDriver;
 import static utils.DataPropLoader.getBrowserProperty;
+import static webdriver.DriverManager.getDriver;
 
 public class WaitUtils {
 

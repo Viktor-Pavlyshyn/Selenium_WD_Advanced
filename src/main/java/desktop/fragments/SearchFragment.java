@@ -5,14 +5,12 @@ import lombok.SneakyThrows;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class SearchFragment extends AbstractFragment {
+import static desktop.functionalActions.BuilderActions.inputAndPressEnter;
+import static desktop.functionalActions.JavascriptActions.elementHighlighter;
 
+public class SearchFragment extends AbstractFragment {
     @FindBy(xpath = "//input[@class=\"text-input\"]")
     private WebElement searchInput;
-
-    public SearchFragment() {
-        setRootElement(searchInput);
-    }
 
     @SneakyThrows
     public void inputValue(String value){

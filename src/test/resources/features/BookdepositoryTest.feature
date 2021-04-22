@@ -8,7 +8,7 @@ Feature: Desktop Checkout for Guest User
     Given I am an anonymous customer with clear cookies
     And I open the "Initial home page"
     And I search for "Thinking in Java"
-    And I am redirected to a "Search page"
+    And I am redirected to a Search page
     And Search results contain the following products
       | Thinking in Java       |
       | Thinking Java Part I   |
@@ -25,15 +25,15 @@ Feature: Desktop Checkout for Guest User
       | Java and Algorithmic Thinking for the Complete Beginner (2nd Edition) |
     And I click 'Add to basket' button for product with name "Thinking in Java"
     And I select 'Basket/Checkout' in basket pop-up
-    And I am redirected to a "Basket page"
+    And I am redirected to a Basket page
     And Basket order summary is as following:
       | Delivery cost | Total   |
-      | FREE          | 80,15 € |
+      | FREE          | 80,06 € |
     And I click 'Checkout' button on 'Basket' page
     And I checkout as a new customer with email "test@user.com"
     And Checkout order summary is as following:
       | Sub-total | Delivery | VAT    | Total   |
-      | 80,15 €   | FREE     | 0,00 € | 80,15 € |
+      | 80,06 €   | FREE     | 0,00 € | 80,06 € |
     And I fill delivery address information manually:
       | Full name | Delivery country | Address line 1   | Address line 2   | Town/City | County/State | Postcode |
       | John      | Ukraine          | Random address 1 | Random address 2 | Kyiv      | Random State | 32357    |

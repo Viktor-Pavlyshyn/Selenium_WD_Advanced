@@ -2,12 +2,12 @@ package stepDefs;
 
 import io.cucumber.java.After;
 
-import static driver.SingletonDriver.getDriver;
+import static webdriver.DriverManager.closeDriver;
 
 public class Hook {
 
     @After
-    public void tearDown(){
-        getDriver().quit();
+    public void tearDown() {
+        closeDriver();
     }
 }

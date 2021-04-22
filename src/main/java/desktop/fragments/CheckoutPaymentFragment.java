@@ -6,6 +6,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import static desktop.functionalActions.JavascriptActions.clickOnElementWithJS;
+import static desktop.functionalActions.JavascriptActions.elementHighlighter;
+import static desktop.functionalActions.SelectActions.selectByText;
 import static utils.WaitUtils.fWaitUtil;
 
 @Data
@@ -41,9 +44,8 @@ public class CheckoutPaymentFragment  extends AbstractFragment {
     @FindBy(xpath = "//iframe[@id=\"chase\"]")
     private WebElement paymentIframe;
 
-    public CheckoutPaymentFragment() {
-        setRootElement(fragmentRootElement);
-    }
+    @FindBy(xpath = "//div[@class=\"block-wrap\"]")
+    private WebElement blockWrap;
 
     public void switchToPaymentIframe() {
         switchToFrame(paymentIframe);

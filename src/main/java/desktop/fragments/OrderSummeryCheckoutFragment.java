@@ -9,10 +9,6 @@ public class OrderSummeryCheckoutFragment extends AbstractFragment {
     @FindBy(xpath = "//div[@class=\"sidebar right\"]")
     private WebElement orderSummery;
 
-    public OrderSummeryCheckoutFragment() {
-        setRootElement(orderSummery);
-    }
-
     public String getTextOrderSummary(){
         return orderSummery.getText();
     }

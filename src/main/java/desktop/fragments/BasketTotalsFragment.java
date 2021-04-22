@@ -9,10 +9,6 @@ public class BasketTotalsFragment extends AbstractFragment {
     @FindBy(xpath = "//div[@class=\"basket-totals\"]")
     private WebElement basketTotals;
 
-    public BasketTotalsFragment() {
-        setRootElement(basketTotals);
-    }
-
     public String getTextBasketTotals(){
         return basketTotals.getText();
     }

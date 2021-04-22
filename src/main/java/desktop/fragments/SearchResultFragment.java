@@ -1,14 +1,18 @@
 package desktop.fragments;
 
 import abstractClasses.fragment.AbstractFragment;
+import lombok.SneakyThrows;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static driver.SingletonDriver.getDriver;
+import static utils.WaitUtils.fWaitUtil;
+import static webdriver.DriverManager.getDriver;
 
 public class SearchResultFragment extends AbstractFragment {
 
@@ -18,12 +22,8 @@ public class SearchResultFragment extends AbstractFragment {
     @FindBy(xpath = "//h3[@class=\"title\"]/a")
     private List<WebElement> bookTitles;
 
-    @FindBy(xpath = "//a[@class=\"btn btn-primary pull-right continue-to-basket string-to-localize link-to-localize\"]")
+    @FindBy(xpath = "//a[@data-localizer-string-id=\"bd_js_basket_checkout\"]")
     private WebElement basketCheckOutButton;
-
-    public SearchResultFragment() {
-        setRootElement(searchTitle);
-    }
 
     public List<String> getBookTitleList() {
         return bookTitles.stream()
@@ -38,6 +38,6 @@ public class SearchResultFragment extends AbstractFragment {
     }
 
     public void clickOnBasketCheckOutButton(){
-        basketCheckOutButton.click();
+        fWaitUtil(ExpectedConditions.elementToBeClickable(basketCheckOutButton)).click();
     }
 }

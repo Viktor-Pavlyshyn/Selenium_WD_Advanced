@@ -5,6 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import static desktop.functionalActions.SelectActions.selectByText;
 import static utils.WaitUtils.fWaitUtil;
 
 public class FilterFragment extends AbstractFragment {
@@ -23,10 +24,6 @@ public class FilterFragment extends AbstractFragment {
     private WebElement buttonRefineResult;
     @FindBy(xpath = "//div[@class=\"corner-content\"]//i[@class=\"icon-close\"]")
     private WebElement closeButtonCornerContent;
-
-    public FilterFragment() {
-        setRootElement(titleSearchFilter);
-    }
 
     public void selectPrice(String text) {
         selectByText(priceRange, text);

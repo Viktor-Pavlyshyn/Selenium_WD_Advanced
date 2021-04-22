@@ -4,6 +4,8 @@ import abstractClasses.fragment.AbstractFragment;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import static desktop.functionalActions.SelectActions.selectByText;
+
 public class NewCustomerFillInFragment extends AbstractFragment {
 
     @FindBy(xpath = "//input[@name=\"emailAddress\"]")
@@ -24,10 +26,6 @@ public class NewCustomerFillInFragment extends AbstractFragment {
     private WebElement inputCountyStates;
     @FindBy(xpath = "//input[@name=\"delivery-postCode\"]")
     private WebElement inputPostcode;
-
-    public NewCustomerFillInFragment() {
-        setRootElement(inputEmail);
-    }
 
     public void enterEmail(String email){
         inputEmail.sendKeys(email);

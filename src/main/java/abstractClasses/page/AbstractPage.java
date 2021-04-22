@@ -1,14 +1,13 @@
 package abstractClasses.page;
 
-import static driver.SingletonDriver.getDriver;
 import static org.apache.commons.lang3.StringUtils.isNotEmpty;
+import static webdriver.DriverManager.getDriver;
 
 public abstract class AbstractPage {
-
     private String pageUrl;
     private String pageUrlPattern;
 
-    public void setPageUrl(String pageUrl) {
+    protected void setPageUrl(String pageUrl) {
         this.pageUrl = pageUrl;
     }
 
@@ -16,25 +15,14 @@ public abstract class AbstractPage {
         return pageUrl;
     }
 
-    public String setPageUrlPattern(String pageUrlPattern) {
-        return this.pageUrlPattern = pageUrlPattern;
+    protected void setPageUrlPattern(String pageUrlPattern) {
+        this.pageUrlPattern = pageUrlPattern;
     }
 
-    public String getPageUrlPattern() {
-        return pageUrlPattern;
-    }
-
-    public boolean checkUrl() {
+    public void checkUrl() {
         boolean result = pageUrl.equals(getDriver().getCurrentUrl());
         if (!result && isNotEmpty(pageUrlPattern)) {
-            return getDriver().getCurrentUrl().matches(pageUrlPattern);
-        }
-        return result;
-    }
-
-    public void verifyIsPageUrlCorrect() {
-        if (!checkUrl()) {
-            throw new RuntimeException(getDriver().getCurrentUrl() + "is incorrect.");
+            getDriver().getCurrentUrl();
         }
     }
 }

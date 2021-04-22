@@ -1,26 +1,25 @@
 package desktop.actions;
 
-import desktop.actions.actionsimpl.*;
+import desktop.actions.actionsimpl.BasketActions;
+import desktop.actions.actionsimpl.CheckoutActions;
+import desktop.actions.actionsimpl.HomeActions;
+import desktop.actions.actionsimpl.SearchResultActions;
 
-public class ActionsRepository extends Repository {
+public class ActionsRepository extends Repository{
 
-    public SearchActions getSearchActions() {
-        return get(SearchActions.class);
+    public HomeActions getHomeActions() {
+        return get(HomeActions.class);
     }
 
     public SearchResultActions getResultSearchActions() {
         return get(SearchResultActions.class);
     }
 
-    public FilterActions getFilterActions() {
-        return get(FilterActions.class);
-    }
-
     public BasketActions getBasketActions() {
         return get(BasketActions.class);
     }
 
-    public CheckoutBasketActions getCheckoutBasketActions() {
-        return get(CheckoutBasketActions.class);
+    public CheckoutActions getCheckoutActions() {
+        return get(CheckoutActions.class);
     }
 }

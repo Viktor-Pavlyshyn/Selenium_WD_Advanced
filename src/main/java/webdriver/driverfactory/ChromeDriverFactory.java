@@ -3,9 +3,8 @@ package webdriver.driverfactory;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import webdriver.WebDriverFactory;
-
-import static webdriver.CapabilitiesHelper.getChromeOptions;
 
 public class ChromeDriverFactory extends WebDriverFactory {
 
@@ -15,5 +14,12 @@ public class ChromeDriverFactory extends WebDriverFactory {
         WebDriver driver = new ChromeDriver(getChromeOptions());
         driver.manage().window().maximize();
         return driver;
+    }
+
+    public ChromeOptions getChromeOptions() {
+        ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.addArguments("--test-type");
+        chromeOptions.addArguments("--ignore-certificate-errors");
+        return chromeOptions;
     }
 }

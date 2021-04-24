@@ -11,18 +11,15 @@ public abstract class AbstractPage {
         this.pageUrl = pageUrl;
     }
 
-    public String getPageUrl() {
-        return pageUrl;
-    }
-
     protected void setPageUrlPattern(String pageUrlPattern) {
         this.pageUrlPattern = pageUrlPattern;
     }
 
-    public void checkUrl() {
+    public boolean isPageOpen() {
         boolean result = pageUrl.equals(getDriver().getCurrentUrl());
         if (!result && isNotEmpty(pageUrlPattern)) {
-            getDriver().getCurrentUrl();
+            result = pageUrl.matches(pageUrlPattern);
         }
+        return result;
     }
 }

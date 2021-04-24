@@ -1,9 +1,7 @@
 package stepDefs;
 
 import desktop.actions.ActionsRepository;
-import desktop.pages.BasketPage;
-import desktop.pages.HomePage;
-import desktop.pages.SearchResultPage;
+import desktop.actions.VerificationActionsRepository;
 import dto.DeliveryAddressInformation;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
@@ -13,10 +11,12 @@ import io.cucumber.java.en.When;
 import java.util.List;
 import java.util.Map;
 
+import static utils.DataPropLoader.getBrowserProperty;
 import static webdriver.DriverManager.getDriver;
 
 public class BookdepositoryDefinitions {
     private final ActionsRepository actions = new ActionsRepository();
+    private final VerificationActionsRepository verificationActions = new VerificationActionsRepository();
 
     @Given("I am an anonymous customer with clear cookies")
     public void iAmAnAnonymousCustomerWithClearCookies() {
@@ -25,10 +25,7 @@ public class BookdepositoryDefinitions {
 
     @And("I open the \"Initial home page\"")
     public void iOpenThe() {
-        HomePage homePage = new HomePage();
-        homePage.checkUrl();
-
-        getDriver().get(homePage.getPageUrl());
+        getDriver().get(getBrowserProperty("base.url"));
     }
 
     @And("I search for {string}")
@@ -38,12 +35,13 @@ public class BookdepositoryDefinitions {
 
     @And("I am redirected to a Search page")
     public void iAmRedirectedToASearchPage() {
-        new SearchResultPage().checkUrl();
+        verificationActions.getResultSearchActions()
+                .verifyCurrentUrl();
     }
 
     @And("Search results contain the following products")
     public void searchResultsContainTheFollowingProducts(List<String> searchParam) {
-        actions.getResultSearchActions()
+        verificationActions.getResultSearchActions()
                 .verifyThatResultContainsValue(searchParam);
     }
 
@@ -55,7 +53,7 @@ public class BookdepositoryDefinitions {
 
     @And("Search results contain only the following products")
     public void searchResultsContainOnlyTheFollowingProducts(List<String> searchParam) {
-        actions.getResultSearchActions()
+        verificationActions.getResultSearchActions()
                 .verifyThatResultContainsValue(searchParam);
     }
 
@@ -73,12 +71,13 @@ public class BookdepositoryDefinitions {
 
     @And("I am redirected to a Basket page")
     public void iAmRedirectedToABasketPage() {
-        new BasketPage().checkUrl();
+        verificationActions.getBasketActions()
+                .verifyCurrentUrl();
     }
 
     @And("Basket order summary is as following:")
     public void basketOrderSummaryIsAsFollowing(DataTable dataTable) {
-        actions.getBasketActions()
+        verificationActions.getBasketActions()
                 .verifyThatTextFromCheckoutOrderSummaryContains(dataTable);
     }
 
@@ -88,7 +87,6 @@ public class BookdepositoryDefinitions {
                 .clickOnButtonCheckout();
     }
 
-
     @And("I checkout as a new customer with email {string}")
     public void iCheckoutAsANewCustomerWithEmail(String email) {
         actions.getCheckoutActions().enterEmail(email);
@@ -96,7 +94,7 @@ public class BookdepositoryDefinitions {
 
     @And("Checkout order summary is as following:")
     public void checkoutOrderSummaryIsAsFollowing(DataTable dataTable) {
-        actions.getCheckoutActions()
+        verificationActions.getCheckoutActions()
                 .verifyThatCheckoutOrderSummaryContains(dataTable);
     }
 

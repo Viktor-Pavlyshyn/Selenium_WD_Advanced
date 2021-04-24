@@ -2,7 +2,6 @@ package desktop.actions.actionsimpl;
 
 import desktop.pages.CheckoutPage;
 import dto.DeliveryAddressInformation;
-import io.cucumber.datatable.DataTable;
 import lombok.extern.log4j.Log4j2;
 
 import java.util.Map;
@@ -17,19 +16,6 @@ public class CheckoutActions {
         checkoutPage.getNewCustomerFillInFragment().enterEmail(email);
 
         log.info("Enter email - {}", email);
-        return this;
-    }
-
-    public CheckoutActions verifyThatCheckoutOrderSummaryContains(DataTable dataTable) {
-        String text = checkoutPage.getOrderSummeryCheckoutFragment().getTextOrderSummary();
-
-        dataTable.asList()
-                .forEach(date -> assertThat(text.contains(date))
-                        .as("Order summery does not contains - {}", date)
-                        .isTrue()
-                );
-
-        log.info("Verify hat Checkout order summary contains - {}", dataTable);
         return this;
     }
 

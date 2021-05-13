@@ -7,24 +7,25 @@ import static webdriver.WebDriverFactory.getDriverFactory;
 
 @Log4j2
 public class DriverManager {
-    private static WebDriverFactory driverFactory = getDriverFactory();
-
     private static final ThreadLocal<WebDriver> DRIVER_POOL = new ThreadLocal<>();
 
     private DriverManager() {
     }
 
     public static WebDriver getDriver() {
+        log.info("Getting WebDriver from DRIVER_POOL.");
+        return DRIVER_POOL.get();
+    }
+
+    public static void initDriver(String browser) {
         if (DRIVER_POOL.get() == null) {
             synchronized (DriverManager.class) {
                 if (DRIVER_POOL.get() == null) {
                     log.info("Setting WebDriver to DRIVER_POOL.");
-                    DRIVER_POOL.set(driverFactory.createDriver());
+                    DRIVER_POOL.set(getDriverFactory(browser).createDriver());
                 }
             }
         }
-        log.info("Getting WebDriver from DRIVER_POOL.");
-        return DRIVER_POOL.get();
     }
 
     public static void closeDriver() {

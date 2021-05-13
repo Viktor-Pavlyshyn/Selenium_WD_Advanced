@@ -22,7 +22,7 @@ public class SearchResultActions {
         log.info("Verify that search results contain the following products {}", searchParam);
     }
 
-    public void verifyCurrentUrl(){
+    public void verifySearchResultPageIsOpened(){
         assertThat(searchResultPage.isPageOpen())
                 .as("Wrong current Url.")
                 .isTrue();

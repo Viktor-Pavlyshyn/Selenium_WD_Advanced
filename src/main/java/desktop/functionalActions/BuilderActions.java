@@ -7,15 +7,16 @@ import org.openqa.selenium.interactions.Actions;
 import static webdriver.DriverManager.getDriver;
 
 public class BuilderActions {
-    private static Actions actions = new Actions(getDriver());
 
     public static void moveToElementAndClick(WebElement element) {
+        Actions actions = new Actions(getDriver());
         actions.moveToElement(element)
                 .click()
                 .perform();
     }
 
     public static void inputAndPressEnter(WebElement element, String text) {
+        Actions actions = new Actions(getDriver());
         actions.moveToElement(element)
                 .sendKeys(element, text)
                 .sendKeys(Keys.ENTER)

@@ -19,4 +19,8 @@ public class DataPropLoader {
     public static String getBrowserProperty(String keyProp) {
         return loadProperties("browser.properties", keyProp);
     }
+
+    public static String getNodeCapabilityProperty(String keyProp) {
+        return loadProperties("nodeCapability.properties", keyProp);
+    }
 }

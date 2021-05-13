@@ -36,7 +36,7 @@ public class BookdepositoryDefinitions {
     @And("I am redirected to a Search page")
     public void iAmRedirectedToASearchPage() {
         verificationActions.getResultSearchActions()
-                .verifyCurrentUrl();
+                .verifySearchResultPageIsOpened();
     }
 
     @And("Search results contain the following products")

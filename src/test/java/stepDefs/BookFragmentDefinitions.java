@@ -1,5 +1,6 @@
 package stepDefs;
 
+import desktop.fragments.BookElement;
 import desktop.fragments.BookTableFragment;
 import io.cucumber.java.en.Then;
 
@@ -7,15 +8,17 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class BookFragmentDefinitions {
 
-    @Then("verify author name - {string} in block - {string} with book - {string} and click add button")
-    public void verifyAuthorAndAddToBasket(String name, String block, String book){
-        BookTableFragment bookTableFragment = new BookTableFragment(block, book);
-        String nameAuthor = bookTableFragment.getAuthorText();
+    @Then("verify that book - {string} in block - {string} have author - {string} and add to basket")
+    public void verifyAuthorAndAddToBasket(String nameBook, String block, String author){
+        BookTableFragment bookTableFragment = new BookTableFragment(block);
+        BookElement book = bookTableFragment.getBookByName(nameBook);
+
+        String nameAuthor = book.getAuthorText();
 
         assertThat(nameAuthor)
-                .as("Expected - {} but found - {}", name, nameAuthor)
-                .isEqualTo(name);
+                .as("Expected - %s but found - %s.", author, nameAuthor)
+                .isEqualTo(author);
 
-        bookTableFragment.clickAddButton();
+        book.clickAddButton();
     }
 }

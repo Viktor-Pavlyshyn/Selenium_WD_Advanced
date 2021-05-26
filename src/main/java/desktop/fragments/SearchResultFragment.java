@@ -1,17 +1,15 @@
 package desktop.fragments;
 
 import abstractClasses.fragment.AbstractFragment;
-import lombok.SneakyThrows;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static utils.WaitUtils.fWaitUtil;
+import static utils.WaitUtils.*;
 import static webdriver.DriverManager.getDriver;
 
 public class SearchResultFragment extends AbstractFragment {
@@ -26,6 +24,7 @@ public class SearchResultFragment extends AbstractFragment {
     private WebElement basketCheckOutButton;
 
     public List<String> getBookTitleList() {
+        fWaitElementsUtil(ExpectedConditions.visibilityOfAllElements(bookTitles));
         return bookTitles.stream()
                 .map(WebElement::getText)
                 .collect(Collectors.toList());

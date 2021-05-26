@@ -3,8 +3,10 @@ package desktop.fragments;
 import abstractClasses.fragment.AbstractFragment;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import static desktop.functionalActions.SelectActions.selectByText;
+import static utils.WaitUtils.fWaitUtil;
 
 public class NewCustomerFillInFragment extends AbstractFragment {
 
@@ -27,8 +29,8 @@ public class NewCustomerFillInFragment extends AbstractFragment {
     @FindBy(xpath = "//input[@name=\"delivery-postCode\"]")
     private WebElement inputPostcode;
 
-    public void enterEmail(String email){
-        inputEmail.sendKeys(email);
+    public void enterEmail(String email) {
+        fWaitUtil(ExpectedConditions.visibilityOf(inputEmail)).sendKeys(email);
     }
 
     public void enterFullName(String fullName) {
@@ -55,7 +57,7 @@ public class NewCustomerFillInFragment extends AbstractFragment {
         inputCountyStates.sendKeys(countyStates);
     }
 
-    public void enterPostcode(String postcode){
+    public void enterPostcode(String postcode) {
         inputPostcode.sendKeys(postcode);
     }
 

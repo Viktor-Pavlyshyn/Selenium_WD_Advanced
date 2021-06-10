@@ -6,7 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-import static utils.WaitUtils.fWaitUtil;
+import static utils.WaitUtils.fWaitUntil;
 
 @Data
 public class CheckoutPaymentFragment  extends AbstractFragment {
@@ -59,7 +59,7 @@ public class CheckoutPaymentFragment  extends AbstractFragment {
 
     public void inputNameOnCard(String nameOnCard) {
         elementHighlighter(nameOnCardInput);
-        fWaitUtil(ExpectedConditions.visibilityOf(nameOnCardInput)).sendKeys(nameOnCard);
+        fWaitUntil(ExpectedConditions.visibilityOf(nameOnCardInput)).sendKeys(nameOnCard);
     }
 
     public void inputCardNumber(String cardNumber) {

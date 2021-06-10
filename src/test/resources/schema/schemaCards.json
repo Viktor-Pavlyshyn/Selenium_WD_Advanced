@@ -1,0 +1,66 @@
+{
+  "entry": {
+    "configurationInfos": "array",
+    "displayOrder": "number",
+    "entryNumber": "number",
+    "product": {
+      "availableForPickup": "boolean",
+      "baseOptions": [
+        {
+          "selected": {
+            "code": "string",
+            "priceData": {
+              "currencyIso": "string",
+              "value": "number"
+            },
+            "stock": {
+              "stockLevel": "number"
+            },
+            "url": "string",
+            "variantOptionQualifiers": "array"
+          },
+          "variantType": "string"
+        }
+      ],
+      "baseProduct": "string",
+      "categories": [
+        {
+          "code": "string",
+          "name": "string"
+        }
+      ],
+      "code": "string",
+      "configurable": "boolean",
+      "homeDeliveryOnly": "boolean",
+      "isLoyaltyProduct": "boolean",
+      "maxOrderQuantity": "number",
+      "name": "string",
+      "pharmacy": "boolean",
+      "price": {
+        "currencyIso": "string",
+        "formattedValue": "string",
+        "oldValueLabel": "string",
+        "priceType": "string",
+        "value": "number"
+      },
+      "productLoyaltyPoints": "number",
+      "purchasable": "boolean",
+      "stock": {
+        "stockLevel": "number",
+        "stockLevelStatus": "string"
+      },
+      "url": "string"
+    },
+    "quantity": "number",
+    "redeemLoyaltyPoints": "number",
+    "redeemLoyaltyPointsForProduct": "number",
+    "rewardLoyaltyPoints": "number",
+    "totalPrice": {
+      "currencyIso": "string",
+      "value": "number"
+    }
+  },
+  "quantity": "number",
+  "quantityAdded": "number",
+  "statusCode": "string"
+}

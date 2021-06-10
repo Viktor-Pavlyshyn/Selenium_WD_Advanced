@@ -5,7 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-import static utils.WaitUtils.fWaitUtil;
+import static utils.WaitUtils.fWaitUntil;
 
 public class FilterFragment extends AbstractFragment {
 
@@ -46,6 +46,6 @@ public class FilterFragment extends AbstractFragment {
 
     public void clickRefineResult() {
         closeButtonCornerContent.click();
-       fWaitUtil(ExpectedConditions.elementToBeClickable(buttonRefineResult)).click();
+       fWaitUntil(ExpectedConditions.elementToBeClickable(buttonRefineResult)).click();
     }
 }

@@ -32,6 +32,7 @@ public class APITests extends BaseTest {
         log.info("INFO.");
         log.warn("WARN");
         log.error("ERROR");
+        log.fatal("FATAL");
 
         actions.getHomePageActions().acceptAllPopup();
 

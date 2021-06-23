@@ -4,10 +4,8 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
+import ua.com.epam.driver.driverlisener.HighLighterEventListener;
 
-import java.util.concurrent.TimeUnit;
-
-import static ua.com.epam.constants.Constants.IMPLICITLY_WAIT_TIMEOUT;
 import static ua.com.epam.driver.CapabilitiesHelper.getChromeOptions;
 
 public class SingletonDriver {
@@ -22,7 +20,6 @@ public class SingletonDriver {
             instance = new EventFiringWebDriver(webDriver);
             instance.manage().window().maximize();
             instance.register(new HighLighterEventListener());
-
         }
         return instance;
     }

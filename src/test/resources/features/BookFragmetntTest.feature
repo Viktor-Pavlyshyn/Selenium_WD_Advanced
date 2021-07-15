@@ -1,4 +1,4 @@
-@Regression2
+@regression
 Feature:
   Scenario: Proceed to checkout, final review and place order as guest user
     Given I am an anonymous customer with clear cookies

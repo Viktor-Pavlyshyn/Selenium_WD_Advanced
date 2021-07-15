@@ -53,8 +53,10 @@ fabric.properties
 # Custom
 .idea/httpRequests
 .idea/
+.gradle/
 .idea/codeStyles/codeStyleConfig.xml
 /target
+/build
 /cucumber-html-reports
 /cucumberReport
 NewProject.iml

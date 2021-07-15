@@ -8,9 +8,7 @@ import static webdriver.DriverManager.*;
 
 @CucumberOptions(
         features = {"src/test/resources/features"},
-        glue = "stepDefs",
-        plugin = {"json:target/cucumber-reports/Cucumber.json"},
-        tags = "@Regression")
+        glue = "stepDefs")
 public class TestRunner extends AbstractTestNGCucumberTests {
 
     @BeforeMethod

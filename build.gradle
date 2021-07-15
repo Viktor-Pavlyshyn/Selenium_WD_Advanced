@@ -1,0 +1,91 @@
+apply plugin: 'java'
+apply plugin: 'maven'
+
+group = 'Selenium_WD_Advanced'
+version = '1.0'
+sourceCompatibility = 8
+targetCompatibility = 8
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+dependencies {
+    implementation group: 'org.apache.maven.plugins', name: 'maven-surefire-plugin', version: '3.0.0-M5'
+    implementation group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-yaml', version: '2.11.0'
+    implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.11.0'
+    implementation group: 'org.assertj', name: 'assertj-core', version: '3.19.0'
+    implementation group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.12.1'
+    implementation group: 'org.projectlombok', name: 'lombok', version: '1.18.12'
+    implementation group: 'io.github.bonigarcia', name: 'webdrivermanager', version: '3.8.1'
+    implementation group: 'io.cucumber', name: 'cucumber-testng', version: '6.1.1'
+    testImplementation group: 'io.cucumber', name: 'cucumber-java', version: '6.1.1'
+    implementation group: 'io.cucumber', name: 'cucumber-java8', version: '6.1.1'
+    implementation group: 'org.seleniumhq.selenium', name: 'selenium-server', version: '3.141.59'
+    implementation group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.14.0'
+    implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.11'
+    implementation group: 'org.testng', name: 'testng', version: '6.14.3'
+    implementation group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.12.1'
+    testImplementation 'io.cucumber:cucumber-java:6.10.4'
+}
+
+configurations {
+    cucumberRuntime {
+        extendsFrom testImplementation
+    }
+}
+
+//gradle cucumber - will run all cucumber scenarios but not these tagged with @Ignore
+//gradle cucumber -P tags=@regression - will run all regression but again will ignore these with the tag @Ignore
+def tags = (findProperty('tags') == null) ? 'not @Ignore' : findProperty('tags') + ' and not @Ignore'
+
+task cucumber() {
+    dependsOn assemble, compileTestJava
+    doLast {
+        javaexec {
+            main = "io.cucumber.core.cli.Main"
+            classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
+
+            args = [
+                    '--threads', '2',
+                    '--plugin', 'pretty',
+                    '--plugin', 'usage:cucumber-usage.json',
+                    '--plugin', 'html:target/cucumber-report.html',
+                    '--glue', 'stepDefs',
+                    '--tags', "${tags}",
+                    'src/test/resources/features',
+            ]
+        }
+    }
+}
+
+task bookTest(type: Test) {
+    scanForTestClasses = false
+    useTestNG() {
+        suites 'src/test/resources/bookdepositorySuite.xml'
+    }
+}
+
+task fragmentTest(type: Test) {
+    scanForTestClasses = false
+    useTestNG() {
+        suites 'src/test/resources/fragmentSuite.xml'
+    }
+}
+
+task parallelTest(type: Test) {
+    maxParallelForks = Runtime.runtime.availableProcessors()
+    useTestNG()
+    include 'runner/ParallelTests*'
+    include 'runner/ParallelTests2*'
+}
+
+task parallelTestNG(type: Test) {
+    useTestNG() {
+        parallel 'methods'
+        threadCount 2
+        include 'runner/ParallelTests*'
+    }
+}
+

@@ -1,0 +1,163 @@
+[
+  {
+    "source": "steps print text {string}",
+    "steps": [
+      {
+        "name": "steps print text \"test1\"",
+        "aggregatedDurations": {
+          "median": 1.009,
+          "average": 1.009
+        },
+        "durations": [
+          {
+            "duration": 1.009,
+            "location": "file:///E:/workspace/E2/Selenium_WD_Advanced/src/test/resources/features/Test1.feature:4"
+          }
+        ]
+      },
+      {
+        "name": "steps print text \"test2\"",
+        "aggregatedDurations": {
+          "median": 1.009,
+          "average": 1.009
+        },
+        "durations": [
+          {
+            "duration": 1.009,
+            "location": "file:///E:/workspace/E2/Selenium_WD_Advanced/src/test/resources/features/Test1.feature:7"
+          }
+        ]
+      },
+      {
+        "name": "steps print text \"test3\"",
+        "aggregatedDurations": {
+          "median": 1.008,
+          "average": 1.008
+        },
+        "durations": [
+          {
+            "duration": 1.008,
+            "location": "file:///E:/workspace/E2/Selenium_WD_Advanced/src/test/resources/features/Test1.feature:10"
+          }
+        ]
+      },
+      {
+        "name": "steps print text \"test4\"",
+        "aggregatedDurations": {
+          "median": 1.018,
+          "average": 1.018
+        },
+        "durations": [
+          {
+            "duration": 1.018,
+            "location": "file:///E:/workspace/E2/Selenium_WD_Advanced/src/test/resources/features/Test1.feature:13"
+          }
+        ]
+      },
+      {
+        "name": "steps print text \"test5\"",
+        "aggregatedDurations": {
+          "median": 1.004,
+          "average": 1.004
+        },
+        "durations": [
+          {
+            "duration": 1.004,
+            "location": "file:///E:/workspace/E2/Selenium_WD_Advanced/src/test/resources/features/Test2.feature:4"
+          }
+        ]
+      },
+      {
+        "name": "steps print text \"test6\"",
+        "aggregatedDurations": {
+          "median": 1.013,
+          "average": 1.013
+        },
+        "durations": [
+          {
+            "duration": 1.013,
+            "location": "file:///E:/workspace/E2/Selenium_WD_Advanced/src/test/resources/features/Test2.feature:7"
+          }
+        ]
+      },
+      {
+        "name": "steps print text \"test7\"",
+        "aggregatedDurations": {
+          "median": 1.002,
+          "average": 1.002
+        },
+        "durations": [
+          {
+            "duration": 1.002,
+            "location": "file:///E:/workspace/E2/Selenium_WD_Advanced/src/test/resources/features/Test2.feature:10"
+          }
+        ]
+      },
+      {
+        "name": "steps print text \"test8\"",
+        "aggregatedDurations": {
+          "median": 1.007,
+          "average": 1.007
+        },
+        "durations": [
+          {
+            "duration": 1.007,
+            "location": "file:///E:/workspace/E2/Selenium_WD_Advanced/src/test/resources/features/Test2.feature:13"
+          }
+        ]
+      },
+      {
+        "name": "steps print text \"test9\"",
+        "aggregatedDurations": {
+          "median": 1.002,
+          "average": 1.002
+        },
+        "durations": [
+          {
+            "duration": 1.002,
+            "location": "file:///E:/workspace/E2/Selenium_WD_Advanced/src/test/resources/features/Test3.feature:4"
+          }
+        ]
+      },
+      {
+        "name": "steps print text \"test10\"",
+        "aggregatedDurations": {
+          "median": 1.007,
+          "average": 1.007
+        },
+        "durations": [
+          {
+            "duration": 1.007,
+            "location": "file:///E:/workspace/E2/Selenium_WD_Advanced/src/test/resources/features/Test3.feature:7"
+          }
+        ]
+      },
+      {
+        "name": "steps print text \"test11\"",
+        "aggregatedDurations": {
+          "median": 1.01,
+          "average": 1.01
+        },
+        "durations": [
+          {
+            "duration": 1.01,
+            "location": "file:///E:/workspace/E2/Selenium_WD_Advanced/src/test/resources/features/Test3.feature:10"
+          }
+        ]
+      },
+      {
+        "name": "steps print text \"test12\"",
+        "aggregatedDurations": {
+          "median": 1.014,
+          "average": 1.014
+        },
+        "durations": [
+          {
+            "duration": 1.014,
+            "location": "file:///E:/workspace/E2/Selenium_WD_Advanced/src/test/resources/features/Test3.feature:13"
+          }
+        ]
+      }
+    ]
+  }
+]

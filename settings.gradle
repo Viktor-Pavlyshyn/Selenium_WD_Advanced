@@ -1,0 +1,3 @@
+rootProject.name = 'Selenium_WD_Advanced'
+include 'test_module'
+
